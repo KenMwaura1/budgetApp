@@ -79,7 +79,7 @@ jobs:
         export SECRET_KEY=test-secret-key
         export DEBUG=1
         export ALLOWED_HOSTS=localhost
-        export GITHUB_WORKFLOW=True
+        export GITHUB_WORKFLOW=False
         export MODE=workflow
         python manage.py makemigrations
         python manage.py migrate
