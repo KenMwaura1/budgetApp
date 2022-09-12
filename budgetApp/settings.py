@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/4.1/ref/settings/
 import os
 from pathlib import Path
 from dotenv import load_dotenv
+import dj_database_url
 
 load_dotenv()
 
@@ -96,7 +97,7 @@ if os.environ.get("GITHUB_WORKFLOW") == "True":
     }
     CORS_ALLOW_ALL_ORIGINS = True
 # development
-if MODE == "dev":
+elif MODE == "dev":
     DATABASES = {
         "default": {
             "ENGINE": "django.db.backends.postgresql_psycopg2",
@@ -106,6 +107,11 @@ if MODE == "dev":
             "HOST": f'{os.environ.get("POSTGRES_DB_HOST")}',
             "PORT": f'{os.environ.get("POSTGRES_DB_PORT")}',
         }
+    }
+else:
+
+    DATABASES = {
+        "default": dj_database_url.config(default=os.environ.get("DATABASE_URL"))
     }
 
 # Password validation
