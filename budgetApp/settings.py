@@ -132,6 +132,8 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+# JWT KEY
+JWT_SECRET_KEY = os.environ.get('JWT_SECRET_KEY')
 
 # Internationalization
 # https://docs.djangoproject.com/en/4.1/topics/i18n/
