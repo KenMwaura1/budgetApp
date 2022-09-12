@@ -79,18 +79,34 @@ WSGI_APPLICATION = 'budgetApp.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
+MODE = os.environ.get("MODE", default="dev")
+DEBUG = os.environ.get("DEBUG", default=True)
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': os.environ.get('DATABASE_NAME'),
-        'USER': os.environ.get('DATABASE_USER'),
-        'PASSWORD': os.environ.get('DATABASE_PASSWORD'),
-        'HOST': '127.0.0.1',
-        'PORT': '5432',
+# GitHub Workflow settings
+if os.environ.get("GITHUB_WORKFLOW") == "True":
+    DATABASES = {
+        "default": {
+            "ENGINE": "django_prometheus.db.backends.postgresql_psycopg2",
+            "NAME": f'{os.environ.get("POSTGRES_DB_NAME")}',
+            "USER": f'{os.environ.get("POSTGRES_USER")}',
+            "PASSWORD": f'{os.environ.get("POSTGRES_PASSWORD")}',
+            "HOST": f'{os.environ.get("POSTGRES_DB_HOST")}',
+            "PORT": f'{os.environ.get("POSTGRES_DB_PORT")}',
+        }
     }
-}
-
+    CORS_ALLOW_ALL_ORIGINS = True
+# development
+if MODE == "dev":
+    DATABASES = {
+        "default": {
+            "ENGINE": "django.db.backends.postgresql_psycopg2",
+            "NAME": f'{os.environ.get("POSTGRES_DB_NAME")}',
+            "USER": f'{os.environ.get("POSTGRES_USER")}',
+            "PASSWORD": f'{os.environ.get("POSTGRES_PASSWORD")}',
+            "HOST": f'{os.environ.get("POSTGRES_DB_HOST")}',
+            "PORT": f'{os.environ.get("POSTGRES_DB_PORT")}',
+        }
+    }
 
 # Password validation
 # https://docs.djangoproject.com/en/4.1/ref/settings/#auth-password-validators
