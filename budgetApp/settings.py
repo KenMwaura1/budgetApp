@@ -86,7 +86,7 @@ DEBUG = os.environ.get("DEBUG", default=True)
 if os.environ.get("GITHUB_WORKFLOW") == "True":
     DATABASES = {
         "default": {
-            "ENGINE": "django_prometheus.db.backends.postgresql_psycopg2",
+            "ENGINE": "django.db.backends.postgresql_psycopg2",
             "NAME": f'{os.environ.get("POSTGRES_DB_NAME")}',
             "USER": f'{os.environ.get("POSTGRES_USER")}',
             "PASSWORD": f'{os.environ.get("POSTGRES_PASSWORD")}',
