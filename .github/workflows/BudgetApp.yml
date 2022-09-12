@@ -12,7 +12,7 @@ jobs:
       matrix:
         python-version: [3.8, 3.9, 3.10.4]
         database-name:
-          - online-store-test
+          - budgetApp
         database-password:
           - postgres
         database-user:
